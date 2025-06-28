@@ -38,7 +38,4 @@
     "eslint": "^9.25.1",
     "typescript": "^5.8.3"
   },
-  "dependencies": {
-    "@vscode/vsce": "^2.15.0"
-  }
 }
