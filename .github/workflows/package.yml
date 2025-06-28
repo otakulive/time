@@ -22,7 +22,10 @@ jobs:
       - name: Install deps
         run: npm ci
 
-      - name: Install vsce
+      - name: Clean npm cache
+        run: npm cache clean --force
+
+      - name: Install vsce (latest)
         run: npm install -g vsce
 
       - name: Package extension
