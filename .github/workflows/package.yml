@@ -10,20 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 18 LTS
+      - name: Setup Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm ci
+      # 清除旧依赖并重新安装，避免使用损坏的 vsce 或缓存模块
+      - name: Clean install
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
 
+      # 使用 npx 执行 vsce（不再全局装 vsce）
       - name: Package VS Code Extension using npx
         run: npx vsce package
 
+      # 上传生成的 vsix 文件作为 artifact
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v4
         with:
