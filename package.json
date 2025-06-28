@@ -1,13 +1,17 @@
 {
   "name": "my-extension",
   "displayName": "My Extension",
-  "description": "A simple VS Code extension.",
+  "description": "A simple VS Code extension",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.85.0"
   },
-  "categories": ["Other"],
-  "activationEvents": ["onCommand:extension.helloWorld"],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.helloWorld"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -19,13 +23,12 @@
   },
   "scripts": {
     "compile": "tsc",
-    "watch": "tsc -watch",
     "package": "vsce package"
   },
   "devDependencies": {
     "@types/node": "^20.4.0",
     "@types/vscode": "^1.85.0",
     "typescript": "^5.4.5",
-    "vsce": "^2.19.0"
+    "vsce": "^2.18.0"
   }
 }
