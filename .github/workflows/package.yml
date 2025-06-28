@@ -2,8 +2,8 @@ name: Build VS Code Extension
 
 on:
   push:
-    branches: [ main ]        # main 分支推送时触发
-  workflow_dispatch:          # 手动触发按钮
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -13,22 +13,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node (18 LTS)
+      # 使用 Node 20 LTS
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
-      # 安装依赖
-      - run: npm ci
+      - name: Install deps
+        run: npm ci
 
-      # 全局装 vsce（云端装一次，干净）
-      - run: npm install -g @vscode/vsce
+      - name: Install vsce
+        run: npm install -g @vscode/vsce
 
-      # 打包，输出 *.vsix 文件
-      - run: vsce package
+      - name: Package extension
+        run: vsce package
 
-      # 把生成的 vsix 作为 artifact 带出来
-      - name: Upload artifact
+      - name: Upload VSIX
         uses: actions/upload-artifact@v4
         with:
           name: vscode-extension
