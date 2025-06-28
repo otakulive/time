@@ -10,28 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 使用 Node 20 LTS
-      - name: Setup Node
+      - name: Setup Node.js 18 LTS
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      - name: Install deps
+      - name: Install dependencies
         run: npm ci
 
-      - name: Clean npm cache
-        run: npm cache clean --force
+      - name: Package VS Code Extension using npx
+        run: npx vsce package
 
-      - name: Install vsce (latest)
-        run: npm install -g vsce
-
-      - name: Package extension
-        run: vsce package
-
-      - name: Upload VSIX
+      - name: Upload VSIX artifact
         uses: actions/upload-artifact@v4
         with:
           name: vscode-extension
